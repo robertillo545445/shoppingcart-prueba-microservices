@@ -32,6 +32,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # ✅ Verificar existencia de Dockerfile product-service
+      - name: Verificar existencia de Dockerfile product-service
+        run: |
+          if [ ! -f ./product-service/Dockerfile ]; then
+            echo "ERROR: Dockerfile not found in product-service"
+            exit 1
+          fi
+
+      # ✅ Verificar existencia de Dockerfile order-service
+      - name: Verificar existencia de Dockerfile order-service
+        run: |
+          if [ ! -f ./order-service/Dockerfile ]; then
+            echo "ERROR: Dockerfile not found in order-service"
+            exit 1
+          fi
+
       - name: Build and push product-service image
         uses: docker/build-push-action@v4
         with:
@@ -53,8 +69,14 @@ jobs:
 
       - name: Deploy to Azure Container App - product-service
         run: |
-          az containerapp update             --name ${{ secrets.AZURE_CONTAINERAPP_PRODUCT }}             --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }}             --image ${{ env.IMAGE_PRODUCT }}:latest
+          az containerapp update \
+            --name ${{ secrets.AZURE_CONTAINERAPP_PRODUCT }} \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.IMAGE_PRODUCT }}:latest
 
       - name: Deploy to Azure Container App - order-service
         run: |
-          az containerapp update             --name ${{ secrets.AZURE_CONTAINERAPP_ORDER }}             --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }}             --image ${{ env.IMAGE_ORDER }}:latest
+          az containerapp update \
+            --name ${{ secrets.AZURE_CONTAINERAPP_ORDER }} \
+            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --image ${{ env.IMAGE_ORDER }}:latest
