@@ -50,14 +50,18 @@ jobs:
             echo "ERROR: Dockerfile not found in order-service"
             exit 1
           fi
+      # Checkout y configuración Docker, Java, etc.
 
+      - name: Build product-service with Maven
+        run: mvn -f ./product-service/pom.xml clean package -DskipTests
       - name: Build and push product-service image
         uses: docker/build-push-action@v4
         with:
           context: ./product-service
           push: true
           tags: ${{ env.IMAGE_PRODUCT }}:latest
-
+      - name: Build order-service with Maven
+        run: mvn -f ./order-service/pom.xml clean package -DskipTests
       - name: Build and push order-service image
         uses: docker/build-push-action@v4
         with:
