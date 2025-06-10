@@ -32,6 +32,23 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      # ✅ Aquí agregas la validación de secrets
+      - name: Validar secrets necesarios
+        run: |
+          if [ -z "${{ secrets.AZURE_RESOURCE_GROUP }}" ]; then
+            echo "ERROR: AZURE_RESOURCE_GROUP no está configurado."
+            exit 1
+          fi
+          if [ -z "${{ secrets.AZURE_CONTAINERAPP_PRODUCT }}" ]; then
+            echo "ERROR: AZURE_CONTAINERAPP_PRODUCT no está configurado."
+            exit 1
+          fi
+          if [ -z "${{ secrets.AZURE_CONTAINERAPP_ORDER }}" ]; then
+            echo "ERROR: AZURE_CONTAINERAPP_ORDER no está configurado."
+            exit 1
+          fi
+          echo "Todos los secrets requeridos están configurados correctamente."
+
       - name: Mostrar estructura de carpetas
         run: ls -R
 
