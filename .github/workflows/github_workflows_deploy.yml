@@ -32,6 +32,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Mostrar estructura de carpetas
+        run: ls -R
+
       # ✅ Verificar existencia de Dockerfile product-service
       - name: Verificar existencia de Dockerfile product-service
         run: |
