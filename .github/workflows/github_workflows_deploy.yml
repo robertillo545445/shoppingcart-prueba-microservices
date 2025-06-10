@@ -32,7 +32,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # ✅ Aquí agregas la validación de secrets
+      # ✅ Aquí agregas la validación de secretss
       - name: Validar secrets necesarios
         run: |
           if [ -z "${{ secrets.AZURE_RESOURCE_GROUP }}" ]; then
