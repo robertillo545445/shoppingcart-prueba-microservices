@@ -35,7 +35,7 @@ jobs:
       - name: Mostrar estructura de carpetas
         run: ls -R
 
-      # ✅ Verificar existencia de Dockerfile product-service
+      # ✅ Verificar existencia de Dockerfile product-service-
       - name: Verificar existencia de Dockerfile product-service
         run: |
           if [ ! -f ./product-service/Dockerfile ]; then
