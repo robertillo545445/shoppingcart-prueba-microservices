@@ -95,7 +95,7 @@ jobs:
         run: |
           az containerapp update \
             --name ${{ secrets.AZURE_CONTAINERAPP_PRODUCT }} \
-            --resource-group ${{ secrets.AZURE_RESOURCE_GROUP }} \
+            --resource-group shopping-cart \
             --image ${{ env.IMAGE_PRODUCT }}:latest
 
       - name: Deploy to Azure Container App - order-service
