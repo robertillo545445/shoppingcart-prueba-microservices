@@ -67,7 +67,7 @@ jobs:
             echo "ERROR: Dockerfile not found in order-service"
             exit 1
           fi
-      # Checkout y configuración Docker, Java, etc.
+      # Checkout y configuración Docker, Java, etc..
 
       - name: Build product-service with Maven
         run: mvn -f ./product-service/pom.xml clean package -DskipTests
@@ -94,13 +94,13 @@ jobs:
       - name: Deploy to Azure Container App - product-service
         run: |
           az containerapp update \
-            --name product-service \
+            --name ${{ secrets.AZURE_CONTAINERAPP_PRODUCT }} \
             --resource-group shopping-cart \
             --image ${{ env.IMAGE_PRODUCT }}:latest
 
       - name: Deploy to Azure Container App - order-service
         run: |
           az containerapp update \
-            --name order-service \
+            --name ${{ secrets.AZURE_CONTAINERAPP_ORDER }} \
             --resource-group shopping-cart \
             --image robertillo545445/order-service:latest
