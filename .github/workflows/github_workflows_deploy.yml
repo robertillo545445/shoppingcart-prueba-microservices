@@ -102,6 +102,6 @@ jobs:
       - name: Deploy to Azure Container App - order-service
         run: |
           az containerapp update \
-            --name order-srvice \
+            --name order-service \
             --resource-group shopping-cart \
             --image robertillo545445/order-service:latest
