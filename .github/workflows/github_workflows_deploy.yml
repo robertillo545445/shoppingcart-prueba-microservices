@@ -94,13 +94,13 @@ jobs:
       - name: Deploy to Azure Container App - product-service
         run: |
           az containerapp update \
-            --name ${{ secrets.AZURE_CONTAINERAPP_PRODUCT }} \
+            --name product-service \
             --resource-group shopping-cart \
-            --image robertillo545445/product-service:latest
+            --image ${{ env.IMAGE_PRODUCT }}:latest
 
       - name: Deploy to Azure Container App - order-service
         run: |
           az containerapp update \
-            --name ${{ secrets.AZURE_CONTAINERAPP_ORDER }} \
+            --name order-service \
             --resource-group shopping-cart \
             --image robertillo545445/order-service:latest
